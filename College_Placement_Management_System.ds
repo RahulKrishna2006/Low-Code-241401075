@@ -1,0 +1,2737 @@
+/*
+ * Author       : rahulkrishna.b.2024.csbs1262
+ * Generated on : 31-Oct-2026 21:34:43
+ * Version      : 1.0
+ */
+ application "College Placement Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form application_record
+		{
+			displayname = "Application Record"
+			success message = "Application Record Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			student
+			(
+				type = list	
+				displayname = "Student"
+				values  = student_profile.ID
+    			displayformat = [roll_number]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_opening
+			(
+				type = list	
+				displayname = "Job Opening"
+				values  = job_opening.ID
+    			displayformat = [job_identifier]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			application_date
+			(
+    			type = date
+				displayname = "Application Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			application_status
+			(
+				type = picklist
+				displayname = "Application Status"
+				values = {"Shortlisted","Rejected","Applied"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			application_reference
+			(
+    			type = text
+				displayname = "Application Reference"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Application Received","Application Under Review","Application Rejected","Application Shortlisted","Application Pending Information","Interview Scheduled","Interview Completed","Interview Rescheduled","Offer Extended","Offer Accepted","Offer Declined","Offer Pending Response","Onboarding Initiated","Offer Withdrawn","Placement Confirmed","Onboarding Paused","Placement Completed"}
+			}
+		}
+		form company_profile
+		{
+			displayname = "Company Profile"
+			success message = "Company Profile Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			company_name
+			(
+    			type = text
+				displayname = "Company Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			industry
+			(
+    			type = text
+				displayname = "Industry"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			hr_contact_name
+			(
+    			type = name
+				displayname = "HR Contact Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			hr_email
+			(
+    			type = email
+				displayname = "HR Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			target_ctc
+			(
+				displayname = "Target CTC"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			minimum_cgpa
+			(
+				type = decimal
+				displayname = "Minimum CGPA Requirement"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			maximum_backlogs_allowed
+			(
+				type = number
+				displayname = "Maximum Backlogs Allowed"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			eligible_departments
+			(
+				type = list	
+				displayname = "Eligible Departments"
+				values = {"Civil","Computer Science","Mechanical","Electronics","Management"}
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			company_code
+			(
+    			type = text
+				displayname = "Company Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form interview_round
+		{
+			displayname = "Interview Round"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			application
+			(
+				type = list	
+				displayname = "Application"
+				values  = application_record.ID
+    			displayformat = [application_reference]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			round_name
+			(
+    			type = text
+				displayname = "Round Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			interviewer_name
+			(
+    			type = name
+				displayname = "Interviewer Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			interviewer_email
+			(
+    			type = email
+				displayname = "Interviewer Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			scheduled_datetime
+			(
+    			type = datetime
+				displayname = "Scheduled Date &amp; Time"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			meeting_link
+			(
+    			type = url
+				displayname = "Meeting Link"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			feedback_notes
+			(
+    			type = textarea
+				displayname = "Feedback Notes"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			round_status
+			(
+				type = picklist
+				displayname = "Round Status"
+				values = {"Scheduled","Cleared","Eliminated","Completed","In Progress"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			round_identifier
+			(
+    			type = text
+				displayname = "Round Identifier"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Interview Scheduled","Interview In Progress","Interview Rescheduled","Interview Cancelled","Interview Completed","Interview Paused","Feedback Pending","Feedback Submitted","Hiring Decision Pending","Interview Round Closed","Candidate Advanced","Candidate Rejected","Next Round Scheduled"}
+			}
+		}
+		form job_opening
+		{
+			displayname = "Job Opening"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			job_title
+			(
+    			type = text
+				displayname = "Job Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			company
+			(
+				type = list	
+				displayname = "Company"
+				values  = company_profile.ID
+    			displayformat = [company_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_description
+			(
+    			type = textarea
+				displayname = "Job Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			application_deadline
+			(
+    			type = date
+				displayname = "Application Deadline"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			hiring_drive_date
+			(
+    			type = date
+				displayname = "Hiring Drive Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_status
+			(
+				type = picklist
+				displayname = "Job Status"
+				values = {"Draft","Active","Closed"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_identifier
+			(
+    			type = text
+				displayname = "Job Identifier"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form student_profile
+		{
+			displayname = "Student Profile"
+			success message = "Student Profile Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			student_name
+			(
+    			type = name
+				displayname = "Student Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			roll_number
+			(
+    			type = text
+				displayname = "Roll Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department
+			(
+				type = picklist
+				displayname = "Department"
+				values = {"Civil","Computer Science","Mechanical","Electronics","Management"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			cgpa
+			(
+				type = decimal
+				displayname = "CGPA"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			backlog_count
+			(
+				type = number
+				displayname = "Backlog Count"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			resume_url
+			(
+    			type = url
+				displayname = "Resume URL"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email
+			(
+    			type = email
+				displayname = "Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			phone_number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			placement_status
+			(
+				type = picklist
+				displayname = "Placement Status"
+				values = {"Shortlisted","Interview Scheduled","Eligible","Placed","Opted Out"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			eligible_departments
+			(
+				type = list	
+				displayname = "Eligible Departments"
+				values = {"Civil","Computer Science","Mechanical","Electronics","Management"}
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		list application_record_Report
+		{
+			displayName = "All Application Records"
+			show all rows from application_record    
+			(
+				student as "Student"
+				job_opening as "Job Opening"
+				application_date as "Application Date"
+				application_status as "Application Status"
+				application_reference as "Application Reference"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (application_status == "Applied")
+				fields = [application_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (application_status == "Rejected")
+				fields = [application_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (application_status == "Shortlisted")
+				fields = [application_status]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban application_record_by_application_status
+		{
+			displayName = "Application Statuses"
+			show all rows from application_record    
+			(
+				student as "Student"
+				job_opening as "Job Opening"
+				application_date as "Application Date"
+				application_status as "Application Status"
+				application_reference as "Application Reference"
+			)
+			options
+			(
+	 			display field = application_status
+	 		)
+		}
+		list job_opening_Report
+		{
+			displayName = "Job Opening Report"
+			show all rows from job_opening    
+			(
+				job_title as "Job Title"
+				company as "Company"
+				job_description as "Job Description"
+				application_deadline as "Application Deadline"
+				hiring_drive_date as "Hiring Drive Date"
+				job_status as "Job Status"
+				job_identifier as "Job Identifier"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (job_status == "Active")
+				fields = [job_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (job_status == "Draft")
+				fields = [job_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban job_opening_by_job_status
+		{
+			displayName = "Job Statuses"
+			show all rows from job_opening    
+			(
+				job_title as "Job Title"
+				company as "Company"
+				job_description as "Job Description"
+				application_deadline as "Application Deadline"
+				hiring_drive_date as "Hiring Drive Date"
+				job_status as "Job Status"
+				job_identifier as "Job Identifier"
+			)
+			options
+			(
+	 			display field = job_status
+	 		)
+		}
+		list student_profile_Report
+		{
+			displayName = "All Student Profiles"
+			show all rows from student_profile    
+			(
+				student_name  as "Student Name"
+				roll_number as "Roll Number"
+				department as "Department"
+				cgpa as "CGPA"
+				backlog_count as "Backlog Count"
+				resume_url as "Resume URL"
+				email as "Email"
+				phone_number as "Phone Number"
+				placement_status as "Placement Status"
+				eligible_departments as "Eligible Departments"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (department == "Civil")
+				fields = [department]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (department == "Computer Science")
+				fields = [department]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (department == "Electronics")
+				fields = [department]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+				"New Formatting4"
+				{
+				condition = (department == "Management")
+				fields = [department]
+				format = "color:#ffffff;background-color:#3598db;"
+				}
+			)
+		}
+		kanban student_profile_by_department
+		{
+			displayName = "Departments"
+			show all rows from student_profile    
+			(
+				student_name  as "Student Name"
+				roll_number as "Roll Number"
+				department as "Department"
+				cgpa as "CGPA"
+				backlog_count as "Backlog Count"
+				resume_url as "Resume URL"
+				email as "Email"
+				phone_number as "Phone Number"
+				placement_status as "Placement Status"
+				eligible_departments as "Eligible Departments"
+			)
+			options
+			(
+	 			display field = department
+	 		)
+		}
+		list company_profile_Report
+		{
+			displayName = "All Company Profiles"
+			show all rows from company_profile    
+			(
+				company_name as "Company Name"
+				industry as "Industry"
+				hr_contact_name  as "HR Contact Name"
+				hr_email as "HR Email"
+				target_ctc as "Target CTC"
+				(
+					display = total,average,min,max	
+				)
+				minimum_cgpa as "Minimum CGPA Requirement"
+				maximum_backlogs_allowed as "Maximum Backlogs Allowed"
+				eligible_departments as "Eligible Departments"
+				company_code as "Company Code"
+			)
+		}
+		list interview_round_Report
+		{
+			displayName = "Interview Round Report"
+			show all rows from interview_round    
+			(
+				application as "Application"
+				round_name as "Round Name"
+				interviewer_name  as "Interviewer Name"
+				interviewer_email as "Interviewer Email"
+				scheduled_datetime as "Scheduled Date &amp; Time"
+				meeting_link as "Meeting Link"
+				feedback_notes as "Feedback Notes"
+				round_status as "Round Status"
+				round_identifier as "Round Identifier"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (round_status == "Cleared")
+				fields = [round_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (round_status == "Eliminated")
+				fields = [round_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (round_status == "Scheduled")
+				fields = [round_status]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban interview_round_by_round_status
+		{
+			displayName = "Round Statuses"
+			show all rows from interview_round    
+			(
+				application as "Application"
+				round_name as "Round Name"
+				interviewer_name  as "Interviewer Name"
+				interviewer_email as "Interviewer Email"
+				scheduled_datetime as "Scheduled Date &amp; Time"
+				meeting_link as "Meeting Link"
+				feedback_notes as "Feedback Notes"
+				round_status as "Round Status"
+				round_identifier as "Round Identifier"
+			)
+			options
+			(
+	 			display field = round_status
+	 		)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='75%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#5A3D9B'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'business-percentage-39'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.student_profile.cgpa.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average of CGPA'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'business-percentage-38'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.company_profile.target_ctc.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#E7E7E7'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Target CTC'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#9366F9'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#AF8CFF'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'business-percentage-39'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.company_profile.minimum_cgpa.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average Minimum Cgpa Requirements'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'travel-world'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.application_record.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Application Records'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Grouped_Panel 1'\n \n\t\n\ttitle = 'Application Status'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '17px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '24%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1ABE75'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'education-award-55'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'application_status == &quot;Shortlisted&quot;'\n\t  value = 'thisapp.application_record.application_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Shortlisted'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '24%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#E2335C'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'design-todo'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'application_status == &quot;Rejected&quot;'\n\t  value = 'thisapp.application_record.application_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Rejected'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1678F9'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'business-law'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'application_status == &quot;Applied&quot;'\n\t  value = 'thisapp.application_record.application_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Applied'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '27%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#F6BC2B'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'travel-world'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '20px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.application_record.application_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 1'\n \n\t\n\ttitle = 'Quick Links'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'application_record'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Application Record'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'job_opening'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Job Opening'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'student_profile'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Student Profile'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'company_profile'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Company Profile'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'CGPA by Backlog Count'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Scatter'\n\txtitle = 'CGPA'\n\tytitle = 'Backlog Count'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'student_profile'\n\txfield = 'cgpa'\n\tyfields = 'value:backlog_count'\n\tgroupBy = 'student_name'\n\t\tDelugeCriteria = 'cgpa is not null'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Department by Backlog Count'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Bar'\n\txtitle = 'Department'\n\tytitle = 'Backlog Count'\n\tbgColor = '#FFFFFF'\n\ttheme = '#198391'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'student_profile'\n\txfield = 'department'\n\tyfields = 'sum:backlog_count'\n\tgroupBy = 'student_name'\n\t\tDelugeCriteria = 'department is not null &amp;&amp; department != &quot;&quot;'\n/>\n\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'application_record_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'custom'\n\theightValue = '500'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+
+		schedule
+		{
+			daily_job_status_cleanup as "Daily Job Status Cleanup"
+			{
+				type =  schedule
+					status = inactive
+				start = "2024-05-26 15:53:12"
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Fetch all job openings that are not yet closed
+										activeJobs = job_opening[job_status == "Active" && application_deadline < today];
+										// Iterate through each job and update its status to Closed
+										for each  job in activeJobs
+										{
+											update job
+											[
+												job_status="Closed"
+											];
+										}
+										// Send notification email to HR about closed jobs
+										if(activeJobs.count() > 0)
+										{
+											jobList = "";
+											for each  job in activeJobs
+											{
+												jobTitle = job.job_title;
+												deadline = job.application_deadline;
+												jobList = jobList.concat(jobTitle.concat(" (Deadline: ").concat(toString(deadline,"dd-MMM-yyyy")).concat(")\n"));
+											}
+											sendmail
+											[
+												from :zoho.adminuserid
+												to :zoho.loginuserid
+												subject :"Job Openings Closed Automatically"
+												message :"The following job openings have been closed as the application deadline has passed:\n\n".concat(jobList)
+											]
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+		blueprint
+		{
+    			student_placement_lifecycle as "Student Placement Lifecycle"
+    			{
+        			type = Blueprint
+        			form = application_record
+        			start
+        			{
+            			start stage = "Application Received"
+        			}
+        			stages
+        			{
+           			"Application Received"
+           			{
+           			}
+           			"Application Under Review"
+           			{
+           			}
+           			"Application Rejected"
+           			{
+           			}
+           			"Application Shortlisted"
+           			{
+           			}
+           			"Application Pending Information"
+           			{
+           			}
+           			"Interview Scheduled"
+           			{
+           			}
+           			"Interview Completed"
+           			{
+           			}
+           			"Interview Rescheduled"
+           			{
+           			}
+           			"Offer Extended"
+           			{
+           			}
+           			"Offer Accepted"
+           			{
+           			}
+           			"Offer Declined"
+           			{
+           			}
+           			"Offer Pending Response"
+           			{
+           			}
+           			"Onboarding Initiated"
+           			{
+           			}
+           			"Offer Withdrawn"
+           			{
+           			}
+           			"Placement Confirmed"
+           			{
+           			}
+           			"Onboarding Paused"
+           			{
+           			}
+           			"Placement Completed"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+    				accept_offer as "Accept Offer"
+    				{
+         				type = normal
+         				from stage = "Offer Extended"
+         				to stage = "Offer Accepted"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				close_application as "Close Application"
+    				{
+         				type = normal
+         				from stage = "Offer Declined"
+         				to stage = "Application Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				confirm_new_interview_time as "Confirm New Interview Time"
+    				{
+         				type = normal
+         				from stage = "Interview Rescheduled"
+         				to stage = "Interview Scheduled"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				confirm_placement as "Confirm Placement"
+    				{
+         				type = normal
+         				from stage = "Onboarding Initiated"
+         				to stage = "Placement Confirmed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				decline_offer as "Decline Offer"
+    				{
+         				type = normal
+         				from stage = "Offer Extended"
+         				to stage = "Offer Declined"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				extend_job_offer as "Extend Job Offer"
+    				{
+         				type = normal
+         				from stage = "Interview Completed"
+         				to stage = "Offer Extended"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				finalize_placement as "Finalize Placement"
+    				{
+         				type = normal
+         				from stage = "Placement Confirmed"
+         				to stage = "Placement Completed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				mark_interview_completed as "Mark Interview as Completed"
+    				{
+         				type = normal
+         				from stage = "Interview Scheduled"
+         				to stage = "Interview Completed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				pause_onboarding as "Pause Onboarding"
+    				{
+         				type = normal
+         				from stage = "Onboarding Initiated"
+         				to stage = "Onboarding Paused"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reject_application as "Reject Application"
+    				{
+         				type = normal
+         				from stage = "Application Received"
+         				to stage = "Application Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				request_additional_info as "Request Additional Information"
+    				{
+         				type = normal
+         				from stage = "Application Under Review"
+         				to stage = "Application Pending Information"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				request_second_interview as "Request Second Interview"
+    				{
+         				type = normal
+         				from stage = "Interview Completed"
+         				to stage = "Application Shortlisted"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reschedule_interview as "Reschedule Interview"
+    				{
+         				type = normal
+         				from stage = "Interview Scheduled"
+         				to stage = "Interview Rescheduled"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				resume_onboarding as "Resume Onboarding"
+    				{
+         				type = normal
+         				from stage = "Onboarding Paused"
+         				to stage = "Onboarding Initiated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				review_updated_application as "Review Updated Application"
+    				{
+         				type = normal
+         				from stage = "Application Pending Information"
+         				to stage = "Application Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				schedule_interview as "Schedule Interview"
+    				{
+         				type = normal
+         				from stage = "Application Shortlisted"
+         				to stage = "Interview Scheduled"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				send_reminder as "Send Reminder"
+    				{
+         				type = normal
+         				from stage = "Offer Pending Response"
+         				to stage = "Offer Extended"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				shortlist_candidate as "Shortlist Candidate"
+    				{
+         				type = normal
+         				from stage = "Application Under Review"
+         				to stage = "Application Shortlisted"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				start_onboarding as "Start Onboarding"
+    				{
+         				type = normal
+         				from stage = "Offer Accepted"
+         				to stage = "Onboarding Initiated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				submit_for_review as "Submit for Review"
+    				{
+         				type = normal
+         				from stage = "Application Received"
+         				to stage = "Application Under Review"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				terminate_onboarding as "Terminate Onboarding"
+    				{
+         				type = normal
+         				from stage = "Onboarding Paused"
+         				to stage = "Offer Withdrawn"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				wait_for_response as "Wait for Response"
+    				{
+         				type = normal
+         				from stage = "Offer Extended"
+         				to stage = "Offer Pending Response"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				withdraw_offer as "Withdraw Offer"
+    				{
+         				type = normal
+         				from stage = "Offer Accepted"
+         				to stage = "Offer Withdrawn"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Interview Scheduler"
+			{
+				name = "Interview Scheduler"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Coordinate interview rounds and assign specific interviewers to candidates \n"
+				ModulePermissions
+				{
+					interview_round
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							interview_round_by_round_status={"View","Edit","Delete"}
+							interview_round_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"HR System Administrator"
+			{
+				name = "HR System Administrator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Manage company profiles and update industry-specific hiring criteria \n"
+				ModulePermissions
+				{
+					application_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							application_record_by_application_status={"View","Edit","Delete"}
+							application_record_Report={"View","Edit","Delete"}
+						}
+					}
+					company_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							company_profile_Report={"View","Edit","Delete"}
+						}
+					}
+					student_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							student_profile_by_department={"View","Edit","Delete"}
+							student_profile_Report={"View","Edit","Delete"}
+						}
+					}
+					job_opening
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							job_opening_Report={"View","Edit","Delete"}
+							job_opening_by_job_status={"View","Edit","Delete"}
+						}
+					}
+					interview_round
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							interview_round_by_round_status={"View","Edit","Delete"}
+							interview_round_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Eligibility Validator"
+			{
+				name = "Eligibility Validator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Verify student CGPA and backlog counts against company requirements \n"
+				ModulePermissions
+				{
+					application_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							application_record_by_application_status={"View","Edit","Delete"}
+							application_record_Report={"View","Edit","Delete"}
+						}
+					}
+					student_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							student_profile_by_department={"View","Edit","Delete"}
+							student_profile_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Placement Coordinator"
+			{
+				name = "Placement Coordinator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Oversee the entire placement lifecycle from eligibility validation to final offers \n"
+				ModulePermissions
+				{
+					application_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							application_record_by_application_status={"View","Edit","Delete"}
+							application_record_Report={"View","Edit","Delete"}
+						}
+					}
+					company_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							company_profile_Report={"View","Edit","Delete"}
+						}
+					}
+					student_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							student_profile_by_department={"View","Edit","Delete"}
+							student_profile_Report={"View","Edit","Delete"}
+						}
+					}
+					job_opening
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							job_opening_Report={"View","Edit","Delete"}
+							job_opening_by_job_status={"View","Edit","Delete"}
+						}
+					}
+					interview_round
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							interview_round_by_round_status={"View","Edit","Delete"}
+							interview_round_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Company HR Representative"
+			{
+				name = "Company HR Representative"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Post job openings and define minimum eligibility criteria for candidates \n"
+				ModulePermissions
+				{
+					job_opening
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							job_opening_Report={"View","Edit","Delete"}
+							job_opening_by_job_status={"View","Edit","Delete"}
+						}
+					}
+					interview_round
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							interview_round_by_round_status={"View","Edit","Delete"}
+							interview_round_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Student"
+			{
+				name = "Student"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Submit applications for job openings and update personal resume details \n"
+				ModulePermissions
+				{
+					application_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							application_record_by_application_status={"View","Edit","Delete"}
+							application_record_Report={"View","Edit","Delete"}
+						}
+					}
+					student_profile
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							student_profile_by_department={"View","Edit","Delete"}
+							student_profile_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form application_record
+			{
+				label placement = left
+			}
+			form company_profile
+			{
+				label placement = left
+			}
+			form interview_round
+			{
+				label placement = left
+			}
+			form job_opening
+			{
+				label placement = left
+			}
+			form student_profile
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report application_record_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								student as "Student"
+								job_opening as "Job Opening"
+								application_date as "Application Date"
+								application_status as "Application Status"
+								application_reference as "Application Reference"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								student as "Student"
+								job_opening as "Job Opening"
+								application_date as "Application Date"
+								application_status as "Application Status"
+								application_reference as "Application Reference"
+							)
+						)
+						datablock2
+						(
+		     				title = "Job Opening"
+		     				related field = job_opening
+							fields
+							(
+								job_title as "Job Title"
+								company as "Company"
+								job_description as "Job Description"
+								application_deadline as "Application Deadline"
+								hiring_drive_date as "Hiring Drive Date"
+								job_status as "Job Status"
+								job_identifier as "Job Identifier"
+							)
+						)
+						datablock3
+						(
+		     				title = "Student"
+		     				related field = student
+							fields
+							(
+								student_name as "Student Name"
+								roll_number as "Roll Number"
+								department as "Department"
+								cgpa as "CGPA"
+								backlog_count as "Backlog Count"
+								resume_url as "Resume URL"
+								email as "Email"
+								phone_number as "Phone Number"
+								placement_status as "Placement Status"
+								eligible_departments as "Eligible Departments"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report application_record_by_application_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								application_reference as "Application Reference"
+								student as "Student"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								student as "Student"
+								job_opening as "Job Opening"
+								application_date as "Application Date"
+								application_status as "Application Status"
+								application_reference as "Application Reference"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report job_opening_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								job_title as "Job Title"
+								company as "Company"
+								job_description as "Job Description"
+								application_deadline as "Application Deadline"
+								hiring_drive_date as "Hiring Drive Date"
+								job_status as "Job Status"
+								job_identifier as "Job Identifier"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								job_title as "Job Title"
+								company as "Company"
+								job_description as "Job Description"
+								application_deadline as "Application Deadline"
+								hiring_drive_date as "Hiring Drive Date"
+								job_status as "Job Status"
+								job_identifier as "Job Identifier"
+							)
+						)
+						datablock2
+						(
+		     				title = "Company"
+		     				related field = company
+							fields
+							(
+								company_name as "Company Name"
+								industry as "Industry"
+								hr_contact_name as "HR Contact Name"
+								hr_email as "HR Email"
+								target_ctc as "Target CTC"
+								minimum_cgpa as "Minimum CGPA Requirement"
+								maximum_backlogs_allowed as "Maximum Backlogs Allowed"
+								eligible_departments as "Eligible Departments"
+								company_code as "Company Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report job_opening_by_job_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								job_title as "Job Title"
+								job_identifier as "Job Identifier"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								job_title as "Job Title"
+								company as "Company"
+								job_description as "Job Description"
+								application_deadline as "Application Deadline"
+								hiring_drive_date as "Hiring Drive Date"
+								job_status as "Job Status"
+								job_identifier as "Job Identifier"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report student_profile_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								student_name as "Student Name"
+								roll_number as "Roll Number"
+								department as "Department"
+								cgpa as "CGPA"
+								backlog_count as "Backlog Count"
+								resume_url as "Resume URL"
+								email as "Email"
+								phone_number as "Phone Number"
+								placement_status as "Placement Status"
+								eligible_departments as "Eligible Departments"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								student_name as "Student Name"
+								roll_number as "Roll Number"
+								department as "Department"
+								cgpa as "CGPA"
+								backlog_count as "Backlog Count"
+								resume_url as "Resume URL"
+								email as "Email"
+								phone_number as "Phone Number"
+								placement_status as "Placement Status"
+								eligible_departments as "Eligible Departments"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report student_profile_by_department
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								student_name as "Student Name"
+								roll_number as "Roll Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								student_name as "Student Name"
+								roll_number as "Roll Number"
+								department as "Department"
+								cgpa as "CGPA"
+								backlog_count as "Backlog Count"
+								resume_url as "Resume URL"
+								email as "Email"
+								phone_number as "Phone Number"
+								placement_status as "Placement Status"
+								eligible_departments as "Eligible Departments"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report company_profile_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								company_name as "Company Name"
+								industry as "Industry"
+								hr_contact_name as "HR Contact Name"
+								hr_email as "HR Email"
+								target_ctc as "Target CTC"
+								minimum_cgpa as "Minimum CGPA Requirement"
+								maximum_backlogs_allowed as "Maximum Backlogs Allowed"
+								eligible_departments as "Eligible Departments"
+								company_code as "Company Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								company_name as "Company Name"
+								industry as "Industry"
+								hr_contact_name as "HR Contact Name"
+								hr_email as "HR Email"
+								target_ctc as "Target CTC"
+								minimum_cgpa as "Minimum CGPA Requirement"
+								maximum_backlogs_allowed as "Maximum Backlogs Allowed"
+								eligible_departments as "Eligible Departments"
+								company_code as "Company Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report interview_round_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								application as "Application"
+								round_name as "Round Name"
+								interviewer_name as "Interviewer Name"
+								interviewer_email as "Interviewer Email"
+								scheduled_datetime as "Scheduled Date &amp; Time"
+								meeting_link as "Meeting Link"
+								feedback_notes as "Feedback Notes"
+								round_status as "Round Status"
+								round_identifier as "Round Identifier"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								application as "Application"
+								round_name as "Round Name"
+								interviewer_name as "Interviewer Name"
+								interviewer_email as "Interviewer Email"
+								scheduled_datetime as "Scheduled Date &amp; Time"
+								meeting_link as "Meeting Link"
+								feedback_notes as "Feedback Notes"
+								round_status as "Round Status"
+								round_identifier as "Round Identifier"
+							)
+						)
+						datablock2
+						(
+		     				title = "Application"
+		     				related field = application
+							fields
+							(
+								student as "Student"
+								job_opening as "Job Opening"
+								application_date as "Application Date"
+								application_status as "Application Status"
+								application_reference as "Application Reference"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report interview_round_by_round_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								interviewer_name as "Interviewer Name"
+								round_name as "Round Name"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								application as "Application"
+								round_name as "Round Name"
+								interviewer_name as "Interviewer Name"
+								interviewer_email as "Interviewer Email"
+								scheduled_datetime as "Scheduled Date &amp; Time"
+								meeting_link as "Meeting Link"
+								feedback_notes as "Feedback Notes"
+								round_status as "Round Status"
+								round_identifier as "Round Identifier"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Application Records"
+					icon = "health-notebook"
+					form  application_record
+					{
+						icon = "ui-1-bold-add"
+					}
+					report application_record_Report
+					{
+						icon = "travel-world"
+					}
+					report application_record_by_application_status
+					{
+						icon = "users-2-woman"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Job Opening"
+					icon = "users-2-a-time"
+					form  job_opening
+					{
+						icon = "ui-1-bold-add"
+					}
+					report job_opening_Report
+					{
+						icon = "business-laptop-71"
+					}
+					report job_opening_by_job_status
+					{
+						icon = "users-2-a-time"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Student Profiles"
+					icon = "education-pencil-47"
+					form  student_profile
+					{
+						icon = "ui-1-bold-add"
+					}
+					report student_profile_Report
+					{
+						icon = "travel-world"
+					}
+					report student_profile_by_department
+					{
+						icon = "business-hierarchy-53"
+					}
+				}
+				section Section_5
+				{
+					displayname = "Company Profiles"
+					icon = "design-web-design"
+					form  company_profile
+					{
+						icon = "ui-1-bold-add"
+					}
+					report company_profile_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section Section_6
+				{
+					displayname = "Interview Round"
+					icon = "media-1-button-next"
+					form  interview_round
+					{
+						icon = "ui-1-bold-add"
+					}
+					report interview_round_Report
+					{
+						icon = "business-laptop-71"
+					}
+					report interview_round_by_round_status
+					{
+						icon = "food-matches"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			new theme = 11
+			font = "poppins"
+			color options
+			{
+				color = "5"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form application_record
+			{
+				label placement = auto
+			}
+			form company_profile
+			{
+				label placement = auto
+			}
+			form interview_round
+			{
+				label placement = auto
+			}
+			form job_opening
+			{
+				label placement = auto
+			}
+			form student_profile
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form application_record
+			{
+				label placement = auto
+			}
+			form company_profile
+			{
+				label placement = auto
+			}
+			form interview_round
+			{
+				label placement = auto
+			}
+			form job_opening
+			{
+				label placement = auto
+			}
+			form student_profile
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = lightred
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}

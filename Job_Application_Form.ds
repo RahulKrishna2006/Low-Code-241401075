@@ -1,0 +1,600 @@
+/*
+ * Author       : rahulkrishna.b.2024.csbs1262
+ * Generated on : 31-Oct-2026 21:42:50
+ * Version      : 1.0
+ */
+ application "Job Application Form"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Job_Application_Form
+		{
+			displayname = "Job Application Form"
+			success message = "Job Application Added Successfully"
+			Section_A_Personal_Details1
+			(
+				type = section
+				displayname = "Section A — Personal Details"
+				visibility = true
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Candidate_Name
+			(
+    			type = name
+				displayname = "Candidate Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Current_Address
+			(
+    			type = address
+				displayname = "Current Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Section_B_Contact_Online_Presence
+			(
+				type = section
+				displayname = "Section B — Contact & Online Presence"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			LinkedIn_Portfolio_URL
+			(
+    			type = text
+				displayname = "LinkedIn / Portfolio URL"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section_C_Job_Experience_Details
+			(
+				type = section
+				displayname = "Section C — Job & Experience Details"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Department_Applied_For
+			(
+				type = picklist
+				displayname = "Department Applied For"
+				maxchar = 100
+				values = {"Software Development","Marketing","Finance","HR"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Employment_Type_Preferred
+			(
+				type = radiobuttons
+				displayname = "Employment Type Preferred"
+				maxchar = 100
+				values = {"Part time","Full time","Internship"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Years_of_Experience
+			(
+				type = number
+				displayname = "Years of Experience"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Key_Skills
+			(
+				type = list	
+				displayname = "Key Skills"
+				values = {"Java","React","SQL","Communication"}
+				height = 60px
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Available_Joining_Date
+			(
+    			type = date
+				displayname = "Available Joining Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Section_D_Interview_Scheduling_Consent
+			(
+				type = section
+				displayname = "Section D — Interview Scheduling & Consent "
+				visibility = true
+	 			row = 4
+	 			column = 0   
+				width = medium
+			)
+			Preferred_Interview_Time
+			(
+    			type = time
+				displayname = "Preferred Interview Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Cover_Letter
+			(
+    			type = textarea
+				displayname = "Cover Letter"
+				height = 100px
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			I_consent_to_background_verification_if_selected
+			(
+				type = checkboxes	
+				displayname = "I consent to background verification if selected"
+				values = {"Checked(Agreed)"}
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Section_A_Personal_Details
+			(
+				type = section
+				displayname = "Section"
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Job_Applications
+		{
+			displayName = "All Job Applications"
+			show all rows from Job_Application_Form    
+			(
+				Candidate_Name  as "Candidate Name"
+				Current_Address  as "Current Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Contact_Number as "Contact Number"
+				(
+					displayformat = plainnumber 
+				)
+				Email_Address as "Email Address"
+				LinkedIn_Portfolio_URL as "LinkedIn / Portfolio URL"
+				Department_Applied_For as "Department Applied For"
+				Employment_Type_Preferred as "Employment Type Preferred"
+				Years_of_Experience as "Years of Experience"
+				Key_Skills as "Key Skills"
+				Available_Joining_Date as "Available Joining Date"
+				Preferred_Interview_Time as "Preferred Interview Time"
+				Cover_Letter as "Cover Letter"
+				I_consent_to_background_verification_if_selected as "I consent to background verification if selected"
+			)
+		}
+	}
+
+
+
+
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "JAF"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Job_Applications
+			{
+				quickview
+				(
+					layout
+					(
+						displaylayout = "classic"
+						datablock1
+						(
+							fields
+							(
+								Candidate_Name as "Candidate Name"
+								Current_Address as "Current Address"
+								Contact_Number as "Contact Number"
+								Email_Address as "Email Address"
+								LinkedIn_Portfolio_URL as "LinkedIn / Portfolio URL"
+								Department_Applied_For as "Department Applied For"
+								Employment_Type_Preferred as "Employment Type Preferred"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Candidate_Name as "Candidate Name"
+								Current_Address as "Current Address"
+								Contact_Number as "Contact Number"
+								Email_Address as "Email Address"
+								LinkedIn_Portfolio_URL as "LinkedIn / Portfolio URL"
+								Department_Applied_For as "Department Applied For"
+								Employment_Type_Preferred as "Employment Type Preferred"
+								Years_of_Experience as "Years of Experience"
+								Key_Skills as "Key Skills"
+								Available_Joining_Date as "Available Joining Date"
+								Preferred_Interview_Time as "Preferred Interview Time"
+								Cover_Letter as "Cover Letter"
+								I_consent_to_background_verification_if_selected as "I consent to background verification if selected"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Job_Applications
+				{
+					displayname = "Job Applications"
+					icon = "users-2-a-time"
+					form  Job_Application_Form
+					{
+						icon = "design-2-form"
+					}
+					report All_Job_Applications
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Job_Application_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
